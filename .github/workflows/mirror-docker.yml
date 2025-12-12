@@ -32,8 +32,10 @@ jobs:
           find . -maxdepth 1 -not -name '.git' -not -name '.github' \
             -not -name '.' -not -name '..' -exec rm -rf {} +
 
-          # Copy contents from supabase/docker to root
+          # Copy contents from supabase/docker to root (including hidden files)
+          shopt -s dotglob
           cp -r /tmp/supabase/docker/* .
+          shopt -u dotglob
 
           # Clean up
           rm -rf /tmp/supabase
